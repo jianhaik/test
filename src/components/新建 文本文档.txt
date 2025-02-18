@@ -1,0 +1,78 @@
+<!DOCTYPE html >
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>js 悬浮窗</title>
+	<script type="text/javascript">
+		var container,win,ctr_width,ctr_height,ctr_left,ctr_top;
+		var win_left,win_top,win_width,win_height,x_offset=5,y_offset=5;
+		function log(msg){
+			console.log(msg);			
+		}
+		function moveWin(){	
+		    win_left=parseInt(win.style.left); 		
+		    win_top=parseInt(win.style.top);
+			if(win_left<ctr_left||win_left>(ctr_left+ctr_width-win_width)){
+				x_offset=-1*x_offset;
+			}
+			if(win_top<ctr_top||win_top>(ctr_top+ctr_height-win_height)){
+				y_offset=-1*y_offset;
+			}			
+			win.style.left=(win_left+x_offset)+"px";
+			win.style.top=(win_top+y_offset)+"px";	
+			setTimeout('moveWin()',100);
+		}
+		function init(win_t,con_t){
+			win=win_t;
+			container=con_t;
+			ctr_width=container.clientWidth;		
+			ctr_height=container.clientHeight;			
+			win_width=win.clientWidth;
+			win_height=win.clientHeight;	
+			ctr_left=container.offsetLeft
+			ctr_top=container.offsetTop;			
+			win.style.left=ctr_left+"px";
+			win.style.top=ctr_top+"px";
+		}
+		window.οnlοad=function(){
+			init(document.getElementById("win"),document.getElementById("container"));
+			moveWin();
+		}		
+	</script>	
+	<style>
+		.win{
+			position:absolute;
+			width: 100px;
+			height: 100px;
+		    left:0;
+		    top:0;
+		    border:1px solid red;
+		    width:300px;
+		    height:250px;
+		    background-color: #222222;	
+		}
+		#container{
+			margin: 0 auto; 
+			background-color: red;		
+			width: 600px;	
+			height: 1000px;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div id="win" class="win">
+			win
+ 
+		</div>
+	</div>
+ 
+</body>
+</html>
+代码解读
+
+————————————————
+
+                            版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+                        
+原文链接：https://blog.csdn.net/bolg_hero/article/details/17042023
